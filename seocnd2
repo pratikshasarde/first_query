@@ -1,0 +1,9 @@
+SELECT 
+g.Name AS Genre, 
+COUNT(ii.Trackld) AS TotalTracksSold 
+FROM InvoiceLine ii 
+JOIN Track t ON ii.Trackld = t.TrackId 
+JOIN Genre g ON t.Genreld = g.Genreld 
+GROUP BY g.Genreld 
+ORDER BY TotalTracksSold DESC 
+LIMIT 1;
