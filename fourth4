@@ -1,0 +1,21 @@
+WITH AlbumSales AS ( 
+SELECT 
+a.Albumld. 
+ar.Name AS ArtistName, 
+a.Title AS Album Title, 
+COUNT(il.InvoiceLineld) AS TracksSold 
+FROM InvoiceLine il 
+JOIN Track t ON il.TrackId = t.TrackId 
+JOIN Album a ON t.AlbumId = a.AlbumId 
+JOIN Artist ar ON a.ArtistId = ar.ArtistId 
+GROUP BY a.Albumld 
+), 
+RankedSales AS ( 
+SELECT 
+RANKO OVER (PARTITION BY ArtistName ORDER BY 
+TracksSold DESC) AS rnk 
+FROM Album Sales 
+) 
+SELECT ArtistName, Album Title, TracksSold 
+FROM RankedSales 
+WHERE rnk = 1;
