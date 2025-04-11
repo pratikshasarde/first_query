@@ -1,0 +1,9 @@
+SELECT 
+c.Customerld, 
+c.FirstName || || c.LastName AS CustomerName, 
+ROUND(SUM(i.Total), 2) AS TotalSpent 
+FROM Customer c 
+JOIN Invoice i ON c.Customerld = i.Customerld 
+GROUP BY c.Customerld 
+ORDER BY TotalSpent DESC 
+LIMIT 5:
